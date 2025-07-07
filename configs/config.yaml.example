@@ -1,0 +1,45 @@
+# Example configuration file for VIA_Chatbot_NDH
+# Rename this file to config.yaml and update with your settings
+
+# Server configuration
+server:
+  host: "0.0.0.0"  # Interface to listen on (0.0.0.0 = all interfaces)
+  port: 7688       # Port to run the API server
+
+# LLM configuration
+llm:
+  model_4_1_mini: "gpt-4.1-mini-2025-04-14"  # Model name for lightweight operations
+  model_4_1: "gpt-4.1-2025-04-14"            # Model name for primary operations
+  temperature: 0.3                           # Temperature for LLM responses (lower = more deterministic)
+  streaming: false                           # Whether to use streaming responses
+  openai_api_key: "your-openai-api-key"      # Your OpenAI API key
+
+# Database configuration
+database_data:
+  user: "your_db_username"                   # Database username
+  password: "your_db_password"               # Database password
+  host: "your_db_host"                       # Database host
+  port: 5432                                 # Database port
+  database: "your_db_name"                   # Database name
+  schema: "via_ndh"                          # Schema name
+  table: "data_ndh"                          # Table name
+
+# Vector database configuration
+vector_db:
+  uri: "http://localhost:19530"              # Milvus connection URI
+  collection_name: "Viettel_ndh_new"         # Milvus collection name
+
+# Data configuration
+data:
+  data_tables_info: "data/metadata.json"     # Path to metadata JSON file
+
+# Bot settings
+bot:
+  history_limit: 5                           # Maximum conversation history to maintain
+  question_sql_limit: 4                      # Maximum SQL questions to process in one request
+  sql_double_check: 3                        # Number of retries for SQL query validation
+
+# Logging configuration
+logging:
+  log_file_path: "logs/chatbot_ndh.log"      # Path to log file
+  level: "INFO"                              # Log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)

@@ -1,0 +1,161 @@
+[
+    {
+        "table_name": "via_ndh.data_ndh",
+        "description": "dữ liệu toàn bộ các bài viết trên trang web Người Đồng Hành",
+        "columns": [
+            {
+                "column_name": "link",
+                "data_type": "text",
+                "description": "Đường dẫn (URL) duy nhất của bài viết"
+            },
+            {
+                "column_name": "category_name",
+                "data_type": "text",
+                "description": "Tên chuyên mục của bài viết"
+            },
+            {
+                "column_name": "title",
+                "data_type": "text",
+                "description": "Tiêu đề chính của bài viết"
+            },
+            {
+                "column_name": "header",
+                "data_type": "text",
+                "description": "Tiêu đề phụ hoặc phần tóm tắt mở đầu"
+            },
+            {
+                "column_name": "body",
+                "data_type": "text",
+                "description": "Nội dung đầy đủ của bài viết"
+            },
+            {
+                "column_name": "author",
+                "data_type": "text",
+                "description": "Tên tác giả hoặc nguồn bài viết"
+            },
+            {
+                "column_name": "is_comment",
+                "data_type": "integer",
+                "description": "Cờ cho phép bình luận (1 = cho phép, 0 = không)"
+            },
+            {
+                "column_name": "is_active",
+                "data_type": "integer",
+                "description": "Trạng thái bài viết (0 – Chưa kích hoạt; 1 – Vô hiệu hóa; 2 – Hoạt động.)"
+            },
+            {
+                "column_name": "is_hot",
+                "data_type": "integer",
+                "description": "Cờ tin nổi bật hoặc xu hướng (1 = hot, 0 = bình thường)"
+            },
+            {
+                "column_name": "is_important",
+                "data_type": "integer",
+                "description": "Cờ tin quan trọng (1 = quan trọng, 0 = không)"
+            },
+            {
+                "column_name": "is_top",
+                "data_type": "integer",
+                "description": "Cờ hiển thị ở vị trí đầu trang (1 = top, 0 = không)"
+            },
+            {
+                "column_name": "has_video",
+                "data_type": "integer",
+                "description": "Cờ cho biết có kèm video (1 = có, 0 = không)"
+            },
+            {
+                "column_name": "comment_count",
+                "data_type": "integer",
+                "description": "Số lượng bình luận đã ghi nhận"
+            },
+            {
+                "column_name": "like_count",
+                "data_type": "integer",
+                "description": "Số lượng lượt thích (like)"
+            },
+            {
+                "column_name": "dislike_count",
+                "data_type": "integer",
+                "description": "Số lượng lượt không thích (dislike)"
+            },
+            {
+                "column_name": "hit_count",
+                "data_type": "integer",
+                "description": "Số lần xem (lượt truy cập)"
+            },
+            {
+                "column_name": "created_at",
+                "data_type": "timestamp",
+                "description": "Thời điểm bản ghi tạo lần đầu"
+            },
+            {
+                "column_name": "updated_at",
+                "data_type": "timestamp",
+                "description": "Thời điểm bản ghi được cập nhật gần nhất"
+            },
+            {
+                "column_name": "published_time",
+                "data_type": "timestamp",
+                "description": "Thời gian bài viết được xuất bản"
+            }
+        ],
+        "sample_questions": [
+            {
+                "question": "Cho tôi danh sách 10 bài viết mới nhất, kèm theo tiêu đề, tác giả và thời gian xuất bản.",
+                "sql": "SELECT title, author, published_time FROM via_ndh.data_ndh ORDER BY published_time DESC LIMIT 10;"
+            },
+            {
+                "question": "Bài viết nào đang có nhiều bình luận nhất? Hiển thị link, title và comment_count.",
+                "sql": "SELECT link, title, comment_count FROM via_ndh.data_ndh ORDER BY comment_count DESC LIMIT 1;"
+            },
+            {
+                "question": "Liệt kê các bài viết có kèm video sắp xếp theo lượt xem giảm dần.",
+                "sql": "SELECT link, title, hit_count FROM via_ndh.data_ndh WHERE has_video = 1 ORDER BY hit_count DESC;"
+            },
+            {
+                "question": "Cho tôi biết tác giả nào đã đăng nhiều bài nhất, cùng với tổng số bài họ đã đăng.",
+                "sql": "SELECT author, COUNT(*) AS total_articles FROM via_ndh.data_ndh GROUP BY author ORDER BY total_articles DESC LIMIT 1;"
+            },
+            {
+                "question": "Thống kê số bài viết theo từng chuyên mục, hiển thị chuyên mục và số lượng bài.",
+                "sql": "SELECT category_name, COUNT(*) AS article_count FROM via_ndh.data_ndh GROUP BY category_name;"
+            },
+            {
+                "question": "Hiển thị 5 bài viết quan trọng được tạo gần đây nhất, kèm link và thời gian tạo.",
+                "sql": "SELECT link, created_at FROM via_ndh.data_ndh WHERE is_important = 1 ORDER BY created_at DESC LIMIT 5;"
+            },
+            {
+                "question": "Cho tôi danh sách các bài viết chưa kích hoạt với tiêu đề và thời gian xuất bản.",
+                "sql": "SELECT title, published_time FROM via_ndh.data_ndh WHERE is_active = 0;"
+            },
+            {
+                "question": "Tìm các bài viết có lượt không thích cao hơn lượt thích",
+                "sql": "SELECT link, title, like_count, dislike_count FROM via_ndh.data_ndh WHERE dislike_count > like_count;"
+            },
+            {
+                "question": "Trong tháng 5 năm 2025 có bao nhiêu bài viết được xuất bản và tổng lượt xem là bao nhiêu?",
+                "sql": "SELECT COUNT(*) AS total_published, SUM(hit_count) AS total_hits FROM via_ndh.data_ndh WHERE published_time >= '2025-05-01' AND published_time < '2025-06-01';"
+            },
+            {
+                "question": "Tính tỷ lệ phần trăm bài viết có bật bình luận trên tổng số bài là bao nhiêu",
+                "sql": "SELECT (COUNT(*) FILTER (WHERE is_comment = 1)::decimal / COUNT(*) * 100) AS comment_enabled_percentage FROM via_ndh.data_ndh;"
+            },
+            {
+                "question": "Cho tôi top 3 bài viết có lượt xem cao nhất trong mỗi chuyên mục",
+                "sql": "SELECT category_name, link, title, hit_count FROM (SELECT category_name, link, title, hit_count, ROW_NUMBER() OVER (PARTITION BY category_name ORDER BY hit_count DESC) AS rn FROM via_ndh.data_ndh) t WHERE rn <= 3 ORDER BY category_name, hit_count DESC;"
+            },
+            {
+                "question": "Tìm các tác giả có tỷ lệ bình luận trên lượt xem (comment_count/hit_count) cao hơn 5%",
+                "sql": "SELECT author, SUM(comment_count) AS total_comments, SUM(hit_count) AS total_hits, (SUM(comment_count)::decimal / NULLIF(SUM(hit_count),0) * 100) AS comment_rate_pct FROM via_ndh.data_ndh GROUP BY author HAVING SUM(comment_count)::decimal / NULLIF(SUM(hit_count),0) > 0.05;"
+            },
+            {
+                "question": "Thống kê số bài viết và tổng lượt xem theo tháng trong 3 tháng gần đây",
+                "sql": "WITH months AS (SELECT date_trunc('month', published_time) AS month_start FROM via_ndh.data_ndh WHERE published_time >= date_trunc('month', CURRENT_DATE) - INTERVAL '2 months' GROUP BY 1) SELECT m.month_start, COUNT(d.link) AS article_count, COALESCE(SUM(d.hit_count),0) AS total_hits FROM months m LEFT JOIN via_ndh.data_ndh d ON date_trunc('month', d.published_time) = m.month_start GROUP BY m.month_start ORDER BY m.month_start DESC;"
+            },
+            {
+                "question": "Tính tổng lượt thích, không thích và kiểm tra những bài có tổng tương tác (like+dislike) chiếm ít nhất 10% lượt xem",
+                "sql": "SELECT link, title, like_count + dislike_count AS total_reactions, hit_count, ((like_count + dislike_count)::decimal / NULLIF(hit_count,0) * 100) AS reaction_rate_pct FROM via_ndh.data_ndh WHERE (like_count + dislike_count)::decimal / NULLIF(hit_count,0) >= 0.10 ORDER BY reaction_rate_pct DESC;"
+            }
+        ]
+    }
+]

@@ -1,0 +1,72 @@
+# Tệp cấu hình bí mật và biến môi trường
+.env
+config.yaml
+docx.docx
+*.pem
+*.key
+*credentials*
+*secret*
+configs/secrets.yaml
+configs/credentials.yaml
+
+# Thư mục ảo và gói cài đặt
+.git
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Thư mục và tệp nhật ký
+logs/
+*.log
+*.log.*
+
+# Cơ sở dữ liệu và tệp dữ liệu cục bộ
+*.db
+*.sqlite
+*.sqlite3
+*.csv
+*.dat
+data/*.json
+!data/metadata.json
+
+# Tệp IDE và Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Tệp cấu hình cá nhân
+.npmrc
+.pypirc
+
+# Tệp tạm và bộ nhớ cache
+.tmp/
+.cache/
+tmp/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Thư mục môi trường Python
+venv/
+virtualenv/
+ENV/
